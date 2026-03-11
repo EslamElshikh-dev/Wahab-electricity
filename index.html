@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="باسم الوهاب، فني كهربائي وسباك محترف بالرياض. أقدم أفضل خدمات تأسيس وصيانة شبكات الكهرباء والسباكة، معالجة الانسدادات، تصليح الأعطال الطارئة، وتركيب الأنظمة الحديثة.">
+    <meta name="keywords" content="سباك بالرياض, كهربائي بالرياض, فني صيانة سباكة, أعطال الكهرباء, تسليك مجاري, تأسيس سباكة, كشف تسربات المياه, باسم الوهاب">
+    
+    <meta property="og:title" content="باسم الوهاب | فني كهرباء وسباكة بالرياض">
+    <meta property="og:description" content="خبير تأسيس وصيانة الكهرباء والسباكة بالرياض، طوارئ 24 ساعة، كشف تسربات، وتسليك مجاري بأحدث الأجهزة.">
+    <meta property="og:image" content="https://imgg.io/images/2026/03/11/2c46f91919746a7ce0b77ed24711f27f.png">
+    <meta property="og:type" content="website">
+    
+    <title>باسم الوهاب لخدمات الكهرباء والسباكة</title>
+    
+    <link rel="icon" href="https://imgg.io/images/2026/03/11/2c46f91919746a7ce0b77ed24711f27f.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://imgg.io/images/2026/03/11/2c46f91919746a7ce0b77ed24711f27f.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ================= المتغيرات والألوان (ثيم الكهرباء والمياه) ================= */
+        :root {
+            --bg-color: #06111f; /* أزرق داكن جداً (ليلي) */
+            --surface-color: #0b1c35; /* كحلي مائل للزرقة */
+            --glass-surface: rgba(11, 28, 53, 0.6); 
+            --glass-border: rgba(52, 152, 219, 0.2); 
+            
+            --yellow-electric: #f1c40f; /* أصفر كهربائي ساطع */
+            --blue-water: #3498db; /* أزرق مائي نقي */
+            --text-light: #f4ece6; 
+            --text-muted: #95a5a6; 
+        }
+
+        /* الإعدادات العامة والخطوط */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; scroll-behavior: smooth; }
+        html, body { width: 100%; overflow-x: hidden; }
+        body { background-color: var(--bg-color); color: var(--text-light); line-height: 1.6; padding-bottom: 90px; }
+        body.no-scroll { overflow: hidden; }
+
+        /* نظام اللغتين */
+        html[lang="ar"] .en { display: none; } html[lang="en"] .ar { display: none; } html[lang="en"] { direction: ltr; }
+
+        /* ================= شاشة التحميل (Loader) ================= */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #0f274a 0%, var(--bg-color) 100%);
+            z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; }
+        
+        .loader-logo-frame {
+            width: 160px; height: 160px; border-radius: 20px;
+            background: var(--glass-surface);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 0 30px rgba(52, 152, 219, 0.15), inset 0 0 20px rgba(52, 152, 219, 0.1);
+            display: flex; justify-content: center; align-items: center;
+            margin-bottom: 25px; animation: floatGlow 2s infinite alternate; padding: 15px;
+        }
+        .loader-logo-frame img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 0 15px rgba(241, 196, 15, 0.3)); }
+        
+        @keyframes floatGlow {
+            0% { transform: translateY(0); box-shadow: 0 0 20px rgba(52, 152, 219, 0.2); }
+            100% { transform: translateY(-10px); box-shadow: 0 0 40px rgba(241, 196, 15, 0.4); }
+        }
+        .loading-text { color: var(--yellow-electric); font-size: 1.2rem; font-weight: 500; margin-top: 10px; letter-spacing: 1px; }
+        .dots::after { content: ''; animation: dotsLoader 1.5s steps(4, end) infinite; }
+        @keyframes dotsLoader { 0%, 20% { content: ''; } 40% { content: '.'; } 60% { content: '..'; } 80%, 100% { content: '...'; } }
+        .loader-footer { position: absolute; bottom: 40px; width: 100%; text-align: center; padding: 0 15px; }
+
+        /* ================= الرأس (Header) ================= */
+        header {
+            background-color: rgba(6, 17, 31, 0.9); padding: 15px 5%;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--glass-border); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+        }
+        .header-right { display: flex; align-items: center; gap: 15px; }
+        .site-title { color: var(--yellow-electric); font-size: 0.95rem; font-weight: 700; white-space: nowrap; text-shadow: 0 0 10px rgba(241, 196, 15, 0.3); }
+        .menu-btn { color: var(--yellow-electric); font-size: 1.5rem; cursor: pointer; background: none; border: none; transition: 0.3s; }
+        .menu-btn:hover { transform: scale(1.1); color: var(--blue-water); }
+        .lang-btn {
+            background: var(--glass-surface); border: 1px solid var(--yellow-electric); color: var(--yellow-electric);
+            padding: 3px 8px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.85rem; transition: 0.3s; font-family: sans-serif;
+        }
+        .lang-btn:hover { background: var(--yellow-electric); color: var(--bg-color); }
+
+        /* ================= القائمة الجانبية ================= */
+        .side-menu {
+            position: fixed; top: 60px; width: 250px; height: calc(100vh - 60px);
+            background-color: rgba(11, 28, 53, 0.98); backdrop-filter: blur(20px); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 999; padding-top: 20px;
+            right: -100%; border-left: 1px solid var(--yellow-electric);
+        }
+        html[lang="ar"] .side-menu.active { right: 0; }
+        html[lang="en"] .side-menu { left: -100%; right: auto; border-right: 1px solid var(--yellow-electric); border-left: none; }
+        html[lang="en"] .side-menu.active { left: 0; }
+        .side-menu a {
+            display: block; padding: 15px 20px; color: var(--text-light); text-decoration: none;
+            font-size: 1.1rem; border-bottom: 1px solid var(--glass-border); transition: 0.3s;
+        }
+        html[lang="ar"] .side-menu a:hover { color: var(--yellow-electric); padding-right: 30px; background: rgba(52, 152, 219, 0.1); }
+        html[lang="en"] .side-menu a:hover { color: var(--yellow-electric); padding-left: 30px; background: rgba(52, 152, 219, 0.1); }
+
+        /* ================= الأقسام العامة والتأثيرات (Animations) ================= */
+        section { padding: 100px 5% 50px; overflow: hidden; }
+        .section-title { text-align: center; color: var(--yellow-electric); font-size: 2.2rem; margin-bottom: 50px; position: relative; text-shadow: 0 0 15px rgba(241, 196, 15, 0.2); }
+        .section-title::after { content: ''; display: block; width: 80px; height: 3px; background: linear-gradient(90deg, transparent, var(--blue-water), transparent); margin: 15px auto; border-radius: 2px; }
+
+        /* حركة الدخول عند السكرول */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ================= الرئيسية ================= */
+        .hero {
+            text-align: center; padding-top: 130px; min-height: 80vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; 
+            background: radial-gradient(ellipse at top, #102d54 0%, var(--bg-color) 70%);
+        }
+        .hero h1 { color: var(--yellow-electric); font-size: clamp(1.6rem, 4vw, 2.5rem); max-width: 1000px; line-height: 1.5; margin-bottom: 25px; text-shadow: 0 4px 15px rgba(0,0,0,0.6); padding: 0 10px; }
+        .hero p { max-width: 900px; font-size: 1.1rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 30px; padding: 0 15px; }
+
+        /* ================= البطاقات الزجاجية (خدمات ومميزات) ================= */
+        .about-text {
+            background: var(--glass-surface); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            padding: 40px; border-radius: 20px; border: 1px solid var(--glass-border); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: center; font-size: 1.1rem; line-height: 1.9;
+        }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        
+        .service-card, .feature-card {
+            background: var(--glass-surface); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border); border-radius: 20px; padding: 35px 25px; 
+            text-align: center; transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .service-card::before, .feature-card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+            transform: skewX(-20deg); transition: 0.5s;
+        }
+        .service-card:hover::before, .feature-card:hover::before { left: 150%; }
+        .service-card:hover, .feature-card:hover { 
+            transform: translateY(-10px); border-color: var(--blue-water); 
+            box-shadow: 0 15px 35px rgba(52, 152, 219, 0.15); background: rgba(52, 152, 219, 0.05);
+        }
+        .service-card:active, .feature-card:active { transform: scale(0.96); }
+
+        /* الأيقونة الـ 3D داخل البطاقات */
+        .icon-3d-wrapper {
+            width: 80px; height: 80px; margin: 0 auto 25px; border-radius: 50%;
+            background: linear-gradient(145deg, #0d213f, #09172d);
+            box-shadow:  5px 5px 10px #040d18, -5px -5px 10px #122b52, inset 0 0 10px rgba(52, 152, 219, 0.2);
+            border: 1px solid var(--glass-border);
+            display: flex; justify-content: center; align-items: center; transition: 0.3s;
+        }
+        .service-card:hover .icon-3d-wrapper, .feature-card:hover .icon-3d-wrapper {
+            box-shadow:  inset 5px 5px 10px #040d18, inset -5px -5px 10px #122b52;
+            color: var(--yellow-electric); border-color: var(--yellow-electric);
+        }
+        .icon-3d-wrapper i { font-size: 2.2rem; color: var(--blue-water); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); transition: 0.3s; }
+        .service-card:hover .icon-3d-wrapper i, .feature-card:hover .icon-3d-wrapper i { color: var(--yellow-electric); }
+
+        .service-card h3, .feature-card h3 { color: var(--text-light); margin-bottom: 15px; font-size: 1.3rem; font-weight: 700; letter-spacing: 0.5px; }
+        .service-card p, .feature-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; text-align: justify; text-align-last: center; }
+
+        /* ================= تواصل معنا والخريطة ================= */
+        .contact-info { text-align: center; margin-bottom: 40px; padding: 0 10px; }
+        .contact-info p { font-size: 0.95rem; margin-bottom: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        html[lang="ar"] .contact-info i { margin-left: 10px; color: var(--yellow-electric); }
+        html[lang="en"] .contact-info i { margin-right: 10px; color: var(--yellow-electric); }
+        
+        .map-container { position: relative; border-radius: 20px; overflow: hidden; border: 2px solid var(--glass-border); height: 450px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .map-container iframe { width: 100% !important; height: 100% !important; border: none; filter: contrast(1.1) opacity(0.85) grayscale(0.2); }
+        
+        .map-pin-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 10; display: flex; flex-direction: column; align-items: center; }
+        .map-pin-icon { color: var(--yellow-electric); font-size: 2.8rem; animation: bouncePin 1.2s infinite cubic-bezier(0.28, 0.84, 0.42, 1); filter: drop-shadow(0 5px 5px rgba(0,0,0,0.8)); }
+        @keyframes bouncePin { 0% { transform: translateY(0) scaleY(0.9); } 50% { transform: translateY(-15px) scaleY(1.05); } 100% { transform: translateY(0) scaleY(0.9); } }
+        
+        /* تصميم النص أعلى يمين الخريطة */
+        .map-text-overlay { 
+            position: absolute; top: 15px;
+            background: rgba(6, 17, 31, 0.95); backdrop-filter: blur(5px);
+            color: var(--yellow-electric); padding: 5px 12px; border-radius: 8px; font-weight: bold; 
+            border: 1px solid var(--blue-water); font-size: 0.75rem; white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5); letter-spacing: 0.5px; z-index: 10; pointer-events: none;
+        }
+        html[lang="ar"] .map-text-overlay { right: 15px; }
+        html[lang="en"] .map-text-overlay { left: 15px; }
+
+        /* ================= البار السفلي ================= */
+        .bottom-nav {
+            position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%);
+            background: rgba(11, 28, 53, 0.9); border: 1px solid var(--glass-border); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-radius: 35px; display: flex; justify-content: space-around; align-items: center;
+            padding: 5px 10px; width: 90%; max-width: 450px; z-index: 1000; box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+        }
+        .bottom-nav a {
+            color: var(--blue-water); text-decoration: none; font-size: 1.1rem;
+            padding: 6px; border-radius: 12px; transition: 0.3s;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; flex: 1; text-align: center;
+        }
+        .bottom-nav a:hover, .bottom-nav a:active { background: var(--glass-surface); color: var(--yellow-electric); transform: translateY(-3px); }
+        .nav-text { font-size: 0.65rem; font-weight: 700; }
+
+        /* ================= الأزرار العائمة ================= */
+        .floating-action-menu { position: fixed; bottom: 95px; display: flex; flex-direction: column; gap: 15px; z-index: 1000; }
+        html[lang="ar"] .floating-action-menu { left: 20px; } html[lang="en"] .floating-action-menu { right: 20px; }
+
+        .float-btn {
+            width: 48px; height: 48px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 1.4rem; text-decoration: none; color: white; border: 2px solid rgba(255,255,255,0.8); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .float-btn:hover { transform: scale(1.15) rotate(5deg); }
+        .call-btn { background-color: var(--yellow-electric); color: #000; border-color: var(--yellow-electric); animation: pulseCall 2s infinite; animation-delay: 1s; }
+        .wa-btn { background-color: #25d366; animation: pulseWA 2s infinite; }
+
+        @keyframes pulseWA { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); } 70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+        @keyframes pulseCall { 0% { box-shadow: 0 0 0 0 rgba(241, 196, 15, 0.5); } 70% { box-shadow: 0 0 0 12px rgba(241, 196, 15, 0); } 100% { box-shadow: 0 0 0 0 rgba(241, 196, 15, 0); } }
+
+        /* ================= التذييل ================= */
+        footer { text-align: center; padding: 50px 15px 100px; background-color: #040b15; border-top: 1px solid var(--glass-border); }
+        .copyright { color: var(--text-muted); font-size: 0.7rem; margin-bottom: 20px; display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 6px; white-space: nowrap; }
+        .designer-badge, .designer-badge-loader { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--glass-border); padding: 8px 18px; border-radius: 30px; text-decoration: none; background: linear-gradient(145deg, #0b1c35, #06111f); transition: 0.3s; text-align: center; max-width: 100%; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+        .designer-badge span, .designer-badge-loader span { color: var(--blue-water); font-weight: bold; font-size: 0.75rem; white-space: normal; letter-spacing: 0.5px; transition: 0.3s; }
+        .designer-badge:hover { background: var(--blue-water); border-color: var(--blue-water); transform: translateY(-3px); }
+        .designer-badge:hover span { color: #fff; }
+
+        /* ================= التجاوب للشاشات الصغيرة ================= */
+        @media (max-width: 768px) {
+            section { padding: 80px 5% 40px; }
+            .section-title { font-size: 1.8rem; margin-bottom: 35px; }
+            .hero { padding-top: 110px; min-height: 70vh; }
+            .hero h1 { font-size: 1.4rem; } .hero p { font-size: 0.95rem; }
+            .about-text { padding: 25px 15px; font-size: 1rem; }
+            .grid-container { grid-template-columns: 1fr; gap: 20px; }
+            .service-card, .feature-card { padding: 30px 15px; }
+            .map-container { height: 350px; }
+            .bottom-nav { width: 95%; bottom: 10px; }
+            .floating-action-menu { bottom: 85px; }
+            .float-btn { width: 42px; height: 42px; font-size: 1.2rem; }
+            header .site-title { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body class="no-scroll">
+
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-logo-frame">
+                <img src="https://imgg.io/images/2026/03/11/2c46f91919746a7ce0b77ed24711f27f.png" alt="Logo">
+            </div>
+            <p class="loading-text">
+                <span class="ar">جاري تحميل الموقع</span><span class="en">Loading Website</span><span class="dots"></span>
+            </p>
+        </div>
+        <div class="loader-footer">
+            <div class="designer-badge-loader">
+                <span class="ar">👑 تم التصميم بواسطة المهندس إسلام الشيخ 👑</span>
+                <span class="en">👑 Designed by Eng. Islam Elsheikh 👑</span>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-right">
+            <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu"><i class="fas fa-bars"></i></button>
+            <div class="site-title">
+                <span class="ar">باسم الوهاب للكهرباء والسباكة</span>
+                <span class="en">Basim Al-Wahhab Elec & Plumb</span>
+            </div>
+        </div>
+        <button id="langToggleBtn" class="lang-btn">EN</button>
+    </header>
+
+    <div class="side-menu" id="sideMenu">
+        <a href="#hero" onclick="toggleMenu()"><span class="ar">الرئيسية</span><span class="en">Home</span></a>
+        <a href="#about" onclick="toggleMenu()"><span class="ar">من أنا</span><span class="en">About Me</span></a>
+        <a href="#services" onclick="toggleMenu()"><span class="ar">خدماتي</span><span class="en">Services</span></a>
+        <a href="#why-us" onclick="toggleMenu()"><span class="ar">لماذا أنا</span><span class="en">Why Me</span></a>
+        <a href="#contact" onclick="toggleMenu()"><span class="ar">تواصل معي</span><span class="en">Contact</span></a>
+    </div>
+
+    <section id="hero" class="hero reveal">
+        <h1>
+            <span class="ar">باسم الوهاب | فني كهرباء وسباكة محترف في الرياض</span>
+            <span class="en">Basim Al-Wahhab | Pro Electrician & Plumber in Riyadh</span>
+        </h1>
+        <p>
+            <span class="ar">أقدم لك حلولاً فنية وهندسية متكاملة لجميع أعمال تأسيس وصيانة شبكات الكهرباء والسباكة. أتميز بالسرعة الفائقة في تلبية نداءات طوارئ السباكة والكهرباء بالرياض، معالجة الانسدادات القوية، كشف وتصليح تسربات المياه المخفية بأحدث الأجهزة، وتركيب الأنظمة الحديثة والفلاتر باحترافية شخصية تضمن لك الأمان المستدام والراحة التامة بأسعار لا تقبل المنافسة.</span>
+            <span class="en">I provide comprehensive technical solutions for all electrical and plumbing installations and maintenance. Excelling in rapid response for emergencies in Riyadh, clearing blockages, detecting hidden leaks with modern devices, and installing advanced systems personally, ensuring sustainable safety and comfort at unbeatable prices.</span>
+        </p>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title reveal"><span class="ar">من أنا</span><span class="en">About Me</span></h2>
+        <div class="about-text reveal">
+            <span class="ar"><strong>باسم الوهاب،</strong> فني خبير ومتخصص في كافة أعمال البنية التحتية لمنزلك بالرياض. أمتلك خبرة طويلة ومهارة عالية في حل أعقد مشاكل السباكة والكهرباء بأحدث التقنيات وبدون تكسير عشوائي. لست مجرد فني صيانة، بل أنا شريكك في الحفاظ على سلامة وقيمة عقارك من خلال تقديم جودة عمل يدوية تدوم طويلاً، وسرعة استجابة شخصية لا مثيل لها تلبي احتياجاتك على مدار الساعة.</span>
+            <span class="en"><strong>Basim Al-Wahhab,</strong> your trusted expert technician specializing in all home infrastructure works in Riyadh. I have extensive experience in solving the most complex plumbing and electrical problems using the latest tech. I am your partner in preserving your property's safety by delivering long-lasting personal handiwork and unparalleled response times.</span>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title reveal"><span class="ar">خدماتي المميزة</span><span class="en">My Premium Services</span></h2>
+        <div class="grid-container">
+            <div class="service-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-bolt"></i></div>
+                <h3><span class="ar">خدمات التركيب والصيانة للكهرباء</span><span class="en">Electrical Installation & Maintenance</span></h3>
+                <p><span class="ar">أقدم خدمات تأسيس وصيانة شبكات الكهرباء للمنازل والمباني التجارية باحترافية عالية. أعتمد على أحدث أجهزة الفحص لتحديد الأعطال بدقة وإصلاحها فوراً لضمان سلامتك. أقوم بتركيب الإضاءات الحديثة، اللوحات الكهربائية، وتمديد الأسلاك بأعلى معايير الأمان العالمية. أنا جاهز للتعامل مع كافة الأحمال وحمايتك من التماسات الخطيرة، لبيئة آمنة ومستقرة تماماً.</span><span class="en">I provide highly professional electrical installation and maintenance for homes and commercial buildings. Relying on the latest testing devices to pinpoint and fix faults instantly for your safety. I install modern lighting, panels, and wiring matching global safety standards, protecting you from dangerous short circuits.</span></p>
+            </div>
+            <div class="service-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-wrench"></i></div>
+                <h3><span class="ar">خدمات الصيانة والتركيب للسباكة</span><span class="en">Plumbing Installation & Maintenance</span></h3>
+                <p><span class="ar">أوفر حلولاً متكاملة لتأسيس وتشطيب أعمال السباكة للفلل، بالإضافة للصيانة الشاملة للمرافق القديمة. أستخدم أجود أنواع الأنابيب والقطع الأصلية التي تضمن عمراً افتراضياً طويلاً وتمنع تسربات المستقبل. أحرص بنفسي على الدقة في توزيع خطوط التغذية والصرف، وتركيب الأطقم الصحية والخلاطات بمهارة عالية تعكس المظهر الجمالي وتحافظ على كفاءة تدفق المياه.</span><span class="en">I offer complete solutions for plumbing installations in villas and comprehensive maintenance for old facilities. Using the finest pipes and original parts ensuring a long lifespan and preventing future leaks. I ensure precise distribution of supply and drainage lines, installing sanitary ware with high skill for a beautiful look.</span></p>
+            </div>
+            <div class="service-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-ambulance"></i></div>
+                <h3><span class="ar">خدمات سباكة الطوارئ</span><span class="en">Emergency Plumbing Services</span></h3>
+                <p><span class="ar">أدرك تماماً أن أعطال السباكة المفاجئة قد تسبب أضراراً جسيمة بالممتلكات، لذلك أوفر خدمة طوارئ مجهزة بأحدث المعدات للتدخل السريع والفعال. سواء كان هناك كسر مفاجئ في أنبوب رئيسي، أو تسرب مياه ضخم يهدد أثاث منزلك، أنا متواجد للسيطرة على الوضع في أسرع وقت بفضل سرعة استجابتي والحلول الجذرية الفورية التي تمنع تفاقم المشكلة نهائياً.</span><span class="en">I fully understand that sudden plumbing failures cause severe property damage, so I provide emergency service equipped with the latest tools for rapid intervention. Whether it's a sudden main pipe burst or a massive leak threatening your furniture, I am ready to control the situation swiftly with radical solutions preventing escalation.</span></p>
+            </div>
+            <div class="service-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-tools"></i></div>
+                <h3><span class="ar">صيانة السباكة الطارئة</span><span class="en">Urgent Plumbing Repairs</span></h3>
+                <p><span class="ar">أنا مخصص للتعامل مع الحالات الحرجة التي تتطلب تدخلاً فنياً فورياً. أقوم بإيقاف التسربات الخطيرة وإصلاح التلفيات الناتجة عن انفجار المواسير أو تعطل المضخات المركزية بشكل عاجل. أستخدم تقنيات حديثة لإجراء صيانة سريعة وموثوقة تعيد تشغيل الأنظمة المعطلة بكفاءة تامة. هدفي الأول هو حماية بيتك من أضرار المياه المفاجئة مع تقديم ضمان فوري على عملي.</span><span class="en">I am dedicated to handling critical cases requiring immediate technical intervention. I urgently stop dangerous leaks and repair damages caused by burst pipes or failed central pumps. Using modern techniques for fast, reliable maintenance restoring failed systems to full efficiency. My goal is protecting your home from sudden water damage.</span></p>
+            </div>
+            <div class="service-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-project-diagram"></i></div>
+                <h3><span class="ar">تصميم وتمديد شبكات الصرف الصحي</span><span class="en">Sewage Networks Design</span></h3>
+                <p><span class="ar">أقدم خدمة احترافية لتصميم وتمديد شبكات الصرف الصحي للمباني السكنية والتجارية وفقاً للمواصفات البلدية الدقيقة. أعتمد على دراسة ميول الأرض واختيار أقطار الأنابيب المناسبة لضمان تدفق سلس ومنع ارتداد المياه أو الروائح. أستخدم مواد عالية التحمل تقاوم الضغط، مع تنفيذ غرف التفتيش بيدي باحترافية تسهل الصيانة لتأسيس بنية قوية تعيش لعقود.</span><span class="en">I offer professional service to design and install sewage networks for buildings matching precise municipal specs. Relying on land slope studies and proper pipe diameters ensuring smooth flow without backups or odors. Using high-endurance materials and personally executing inspection chambers for decades of strong infrastructure.</span></p>
+            </div>
+            <div class="service-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-toilet"></i></div>
+                <h3><span class="ar">معالجة الانسدادات المفاجئة</span><span class="en">Sudden Blockage Treatment</span></h3>
+                <p><span class="ar">هل تعاني من طفح المياه أو انسداد المجاري؟ أقدم خدمة التسليك السريع باستخدام أحدث أجهزة الضغط العالي والشفط الميكانيكي التي تفتت الرواسب والدهون المتصلبة دون الحاجة لتكسير البلاط. أعالج انسدادات الأحواض، الحمامات، وغرف التفتيش بفاعلية تقضي على المشكلة من جذورها وتمنع انتشار الحشرات لتعود شبكة الصرف للعمل بكامل طاقتها بشكل فوري ومضمون.</span><span class="en">Suffering from water overflows or clogged drains? I offer fast unclogging using the latest high-pressure and mechanical suction devices that break down hardened fats without breaking tiles. Effectively treating sinks, bathrooms, and manholes to eliminate the root cause and prevent insects immediately.</span></p>
+            </div>
+            <div class="service-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-fire-alt"></i></div>
+                <h3><span class="ar">إصلاح أعطال السخانات</span><span class="en">Water Heater Repairs</span></h3>
+                <p><span class="ar">لا غنى عن المياه الدافئة في منزلك! أوفر صيانة احترافية لجميع أنواع السخانات المركزية والعادية (الكهربائية والفورية). أقوم بتغيير شمعات التسخين، إصلاح الثرموستات، وتنظيف السخان من التكلسات التي تضعف كفاءته. كما أعالج تهريب المياه من السخان لضمان أمان عائلتك وحمايتهم من أخطار الالتماسات الكهربائية مع تقديم وتركيب قطع غيار أصلية بضمان حقيقي.</span><span class="en">Warm water is essential! I provide professional maintenance for all types of central, electric, and instant water heaters. Changing heating elements, repairing thermostats, and cleaning calcification that weakens efficiency. I also fix heater water leaks to ensure your family's safety from short circuits using original guaranteed parts.</span></p>
+            </div>
+            <div class="service-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-shower"></i></div>
+                <h3><span class="ar">تركيب أنظمة السباكة الحديثة</span><span class="en">Modern Plumbing Systems</span></h3>
+                <p><span class="ar">أواكب التطور التكنولوجي لأوفر لك أحدث أنظمة السباكة الذكية، مثل أنظمة تدفق المياه الموفرة، الخلاطات المخفية (المدفونة)، وأنظمة الشاور الحديثة. أقوم بتأسيس الشبكات باستخدام الأنابيب الحرارية (الخضراء) التي تتحمل الضغط العالي وتمنع تكون البكتيريا. أهتم بتطبيق المعايير العصرية لضمان رفاهيتك بلمسة فنية يدوية تتناسب مع ديكورات الفلل الحديثة.</span><span class="en">I keep pace with tech to provide the latest smart plumbing systems, like water-saving flows, concealed mixers, and modern shower systems. Establishing networks using thermal (green) pipes that withstand high pressure and prevent bacteria. Applying modern standards to ensure your luxury with an artistic personal touch.</span></p>
+            </div>
+            <div class="service-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-database"></i></div>
+                <h3><span class="ar">تركيب خزانات المياه</span><span class="en">Water Tanks Installation</span></h3>
+                <p><span class="ar">أضمن لك مياهاً نقية ومتوفرة دائماً من خلال خدمات تركيب الخزانات العلوية والأرضية باحترافية تامة. أقوم باختيار أفضل الأماكن للتثبيت، مع عمل التوصيلات وتركيب العوامات والمضخات الديناميكية لضمان ضغط مياه ممتاز بجميع الطوابق. كما أوفر خدمات العزل وتوصيل شبكات التهوية لتجنب تراكم البكتيريا، مما يحافظ على جودة المياه ونظافتها لفترات طويلة.</span><span class="en">I guarantee pure, always-available water through professional upper and ground tank installations. Choosing the best spots, making connections, and installing floats and dynamic pumps for excellent water pressure on all floors. Providing insulation and ventilation networks to avoid bacteria, keeping your water clean and high-quality.</span></p>
+            </div>
+            <div class="service-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-filter"></i></div>
+                <h3><span class="ar">تركيب وصيانة فلاتر المياه</span><span class="en">Water Filters Services</span></h3>
+                <p><span class="ar">صحتك تبدأ من كوب ماء نقي. متخصص في تركيب أجهزة تحلية المياه المنزلية وفلاتر التنقية المتعددة المراحل التي تزيل الشوائب، الكلور، والأملاح الزائدة. أقدم خدمة الصيانة الدورية لتغيير الشمعات في وقتها المحدد وقياس نسبة نقاء المياه (TDS) لضمان حصولك على مياه شرب صحية وآمنة. أوفر أفضل الأجهزة العالمية لضمان أعلى درجات الفلترة وعمر افتراضي طويل.</span><span class="en">Your health starts with a pure glass of water. Specialist in installing home water desalination devices and multi-stage purification filters removing impurities, chlorine, and excess salts. Offering periodic maintenance to change cartridges on time and measure water purity (TDS) ensuring healthy drinking water with top global devices.</span></p>
+            </div>
+            <div class="service-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-search-location"></i></div>
+                <h3><span class="ar">إصلاح الأنابيب وتسربات المياه</span><span class="en">Pipe & Leak Repairs</span></h3>
+                <p><span class="ar">التسربات الخفية هي العدو الأول لأساسات المباني. أستخدم أجهزة كشف التسربات الإلكترونية الدقيقة بالذبذبات الصوتية لتحديد مكان الخلل دون أي تكسير عشوائي. أعالج كافة تشققات الأنابيب الداخلية والخارجية باحترافية شخصية، وأوفر حلول عزل قوية تمنع تسرب المياه للأسقف، مما يحمي منزلك من الرطوبة وارتفاع فواتير المياه، لتعيش في بيئة آمنة وجافة تماماً.</span><span class="en">Hidden leaks are the primary enemy of building foundations. I use precise electronic sound-wave leak detectors to locate the fault without random breaking. Professionally treating internal and external pipe cracks personally, providing strong insulation solutions preventing leaks to ceilings, protecting your home from moisture.</span></p>
+            </div>
+            <div class="service-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-wind"></i></div>
+                <h3><span class="ar">تنظيف وتسليك المجاري</span><span class="en">Drain Cleaning & Unclogging</span></h3>
+                <p><span class="ar">أقدم خدمة شاملة لتطهير شبكات الصرف الصحي والمجاري من التراكمات القوية باستخدام مواد آمنة وآلات تسليك متطورة (السوستة الكهربائية وضغط النيتروجين). أقوم بتنظيف البيارات الرئيسية والفرعية وإزالة العوائق الصلبة التي تعيق تدفق المياه. هذه الخدمة الدورية تضمن عدم حدوث طفح مفاجئ وتحمي المبنى من الروائح الكريهة وتكاثر البكتيريا لبيئة صحية نظيفة.</span><span class="en">I offer a comprehensive service to purify sewage networks from strong buildups using safe materials and advanced machines (electric snakes and nitrogen pressure). Cleaning main and sub-manholes and removing solid obstacles blocking water flow. This periodic service guarantees no sudden overflows, protecting the building from bad odors.</span></p>
+            </div>
+            <div class="service-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-faucet"></i></div>
+                <h3><span class="ar">صيانة الحنفيات والمحابس</span><span class="en">Faucet & Valve Maintenance</span></h3>
+                <p><span class="ar">أهتم بأدق تفاصيل السباكة لضمان راحتك اليومية. أقدم خدمات صيانة واستبدال الحنفيات، المحابس الرئيسية، خلاطات المطابخ والحمامات بكل كفاءة. أعالج مشاكل تنقيط المياه المزعجة، وضعف ضغط الماء، وتلف قلب الخلاط. أوفر لك تشكيلة من أفضل الإكسسوارات الصحية الأصلية والمقاومة للصدأ، لضمان تشغيل سلس وشكل جمالي يضفي أناقة على المكان، مع توفير هدر المياه.</span><span class="en">I care about the finest plumbing details for your daily comfort. Efficiently providing maintenance and replacement for faucets, main valves, and kitchen/bathroom mixers. Treating annoying dripping, low water pressure, and damaged mixer cores. Providing top original rust-proof sanitary accessories for smooth operation and elegance.</span></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-us">
+        <h2 class="section-title reveal"><span class="ar">لماذا أنا خيارك الأول؟</span><span class="en">Why Choose Me?</span></h2>
+        <div class="grid-container">
+            <div class="feature-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-award"></i></div>
+                <h3><span class="ar">جودة في التنفيذ وإتقان في العمل</span><span class="en">Quality & Mastery</span></h3>
+                <p><span class="ar">التزامي الكامل بأعلى معايير الجودة في كل عمل أنجزه بيدي. أمتلك المهارة والخبرة لضمان تنفيذ أعمال الكهرباء والسباكة بدقة متناهية، مما يمنحك راحة البال ونتائج تدوم طويلاً دون الحاجة لإصلاحات متكررة أو مصاريف إضافية ترهق ميزانيتك.</span><span class="en">My full commitment to the highest quality standards in every work I do by hand. I have the skill and experience to ensure executing electrical and plumbing works with extreme precision, giving you peace of mind and long-lasting results.</span></p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-stopwatch"></i></div>
+                <h3><span class="ar">استجابة سريعة للطوارئ</span><span class="en">Fast Emergency Response</span></h3>
+                <p><span class="ar">أدرك خطورة أعطال الكهرباء والمياه، لذا أنا جاهز للتحرك الفوري في أي وقت. أصلك في أسرع وقت للسيطرة على الموقف وحل الأعطال الطارئة جذرياً لتقليل الخسائر وحماية ممتلكاتك وأسرتك من أي أضرار جانبية محتملة بكل احترافية وأمان.</span><span class="en">I realize the danger of electrical and water failures, so I am ready to move instantly anytime. I reach you as fast as possible to control the situation and radically solve emergencies to minimize losses and protect your property professionally.</span></p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-shield-alt"></i></div>
+                <h3><span class="ar">خامات أصلية وضمان شامل</span><span class="en">Original Materials & Warranty</span></h3>
+                <p><span class="ar">لا أساوم أبداً على جودة المواد. أستخدم فقط الأنابيب والأسلاك وقطع الغيار الأصلية والمعتمدة لضمان أقصى درجات الأمان والكفاءة. أقدم لك ضماناً على كافة أعمالي لأؤكد لك مدى ثقتي في كفاءة خدماتي وحرصي على إرضائك التام وكسب ثقتك.</span><span class="en">I never compromise on material quality. Using only certified original pipes, wires, and spare parts ensuring maximum safety and efficiency. I provide a warranty on all my works confirming my confidence in my services and dedication to your satisfaction.</span></p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="icon-3d-wrapper"><i class="fas fa-tags"></i></div>
+                <h3><span class="ar">أسعار تنافسية تناسب الجميع</span><span class="en">Competitive Prices</span></h3>
+                <p><span class="ar">أقدم لك المعادلة الصعبة: جودة عمل يدوية لا تُضاهى وفخامة في التأسيس والتشطيب بأسعار مدروسة وشفافة جداً. أضع خطط تسعير واضحة خالية من أي تكاليف خفية، لتتناسب مع ميزانيتك وتحقق لك أقصى قيمة مقابل ما تدفعه في خدماتي.</span><span class="en">I offer the hard equation: unmatched manual work quality and luxury in installation and finishing at very reasonable, transparent prices. Setting clear pricing plans free of hidden costs, suiting your budget and giving you maximum value.</span></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title reveal"><span class="ar">تواصل معي</span><span class="en">Contact Me</span></h2>
+        <div class="contact-info reveal">
+            <p style="font-size: 0.85rem; white-space: nowrap;"><i class="fas fa-map-marker-alt"></i> <span class="ar">العنوان: </span><span class="en">Address: </span><span style="color:var(--text-light);">الرياض - المملكة العربية السعودية</span></p>
+            <p style="font-size: 0.85rem; white-space: nowrap;"><i class="fas fa-phone"></i> <span class="ar">رقم التواصل: </span><span class="en">Phone: </span><a href="tel:0582841583" style="color:var(--text-light); text-decoration:none; direction:ltr; display:inline-block;">0582841583</a></p>
+            <p style="font-size: 0.85rem; white-space: nowrap;"><i class="fas fa-envelope"></i> <span class="ar">البريد الإلكتروني: </span><span class="en">Email: </span><a href="mailto:info@wahabplumbingelectric.com" style="color:var(--text-light); text-decoration:none;">info@wahabplumbingelectric.com</a></p>
+        </div>
+        
+        <div class="map-container reveal">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d463877.3124119337!2d46.93510599557434!3d24.725455365518292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2z2KfZhNix2YrYp9i2INin2YTZhdmF2YTYg9ipINin2YTYudix2KjZitipINin2YTYs9i52YjYrdiv2YrYqQ!5e0!3m2!1sar!2seg!4v1700000000000!5m2!1sar!2seg" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            
+            <div class="map-pin-center">
+                <i class="fas fa-map-marker-alt map-pin-icon"></i>
+            </div>
+            
+            <div class="map-text-overlay">
+                <span class="ar">نخدم جميع أنحاء الرياض 📍</span>
+                <span class="en">📍 Serving all areas of Riyadh</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="floating-action-menu">
+        <a href="tel:0582841583" class="float-btn call-btn" aria-label="Call"><i class="fas fa-phone-alt"></i></a>
+        <a href="https://wa.me/966582841583" class="float-btn wa-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="#hero"><i class="fas fa-home"></i><span class="nav-text"><span class="ar">الرئيسية</span><span class="en">Home</span></span></a>
+        <a href="#services"><i class="fas fa-tools"></i><span class="nav-text"><span class="ar">خدماتي</span><span class="en">Services</span></span></a>
+        <a href="#why-us"><i class="fas fa-star"></i><span class="nav-text"><span class="ar">لماذا أنا</span><span class="en">Why Me</span></span></a>
+        <a href="#contact"><i class="fas fa-phone-alt"></i><span class="nav-text"><span class="ar">تواصل</span><span class="en">Contact</span></span></a>
+    </nav>
+
+    <footer>
+        <div class="copyright">
+            <i class="fas fa-copyright"></i> 
+            <span class="ar">جميع الحقوق محفوظة لدى : باسم الوهاب لخدمات الكهرباء والسباكة 2026</span>
+            <span class="en">All rights reserved to Basim Al-Wahhab Electrical & Plumbing 2026</span>
+        </div>
+        
+        <a href="https://wa.me/966547194788" target="_blank" class="designer-badge" rel="noopener noreferrer">
+            <span class="ar">👑 تم التصميم بواسطة المهندس إسلام الشيخ 👑</span>
+            <span class="en">👑 Designed by Eng. Islam Elsheikh 👑</span>
+        </a>
+    </footer>
+
+    <script>
+        // إعدادات شاشة التحميل
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.classList.add('hidden');
+                document.body.classList.remove('no-scroll');
+                setTimeout(() => { loader.style.display = 'none'; }, 500);
+            }, 2500); 
+        });
+
+        // القائمة الجانبية
+        function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            sideMenu.classList.toggle('active');
+        }
+
+        // نظام اللغتين
+        const langBtn = document.getElementById('langToggleBtn');
+        let currentLang = 'ar';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            langBtn.innerText = lang === 'ar' ? 'EN' : 'AR';
+            localStorage.setItem('siteLang', lang);
+            document.getElementById('sideMenu').classList.remove('active');
+        }
+
+        langBtn.addEventListener('click', () => { setLanguage(currentLang === 'ar' ? 'en' : 'ar'); });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('siteLang');
+            if (savedLang) { setLanguage(savedLang); } 
+            else {
+                const browserLang = navigator.language || navigator.userLanguage;
+                setLanguage(browserLang.toLowerCase().startsWith('ar') ? 'ar' : 'en');
+            }
+        });
+
+        // كود الأنيميشن عند السكرول (Intersection Observer)
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+            const elementVisible = 100;
+
+            reveals.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealOnScroll);
+        setTimeout(revealOnScroll, 2600); 
+    </script>
+</body>
+</html>
